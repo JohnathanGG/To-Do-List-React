@@ -1,12 +1,14 @@
 import { useState, type ChangeEvent } from "react";
+import { useSetAtom } from 'jotai'
 import { TextField, Button } from "@mui/material";
 
-interface NewTaskProps {
-  onAddTask: (taskName: string) => void;
-}
+import { tasks } from "../utils/atoms";
+import type { Task } from "../utils/types";
 
-export default function NewTask({ onAddTask }: NewTaskProps) {
+
+export default function NewTask() {
   const [formData, setFormData] = useState<string>("");
+  const setTaskList = useSetAtom(tasks);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -15,7 +17,8 @@ export default function NewTask({ onAddTask }: NewTaskProps) {
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onAddTask(formData);
+    const newTask: Task = { taskName: formData, complete: false };
+    setTaskList((prevTasks) => [...prevTasks, newTask]);
     setFormData("");
   };
 

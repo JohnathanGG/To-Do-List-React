@@ -1,8 +1,10 @@
-import {Checkbox, List, ListItem } from "@mui/material";
+import { Checkbox, List, ListItem } from "@mui/material";
+import { useAtomValue } from "jotai";
 
+import { tasks } from "../utils/atoms";
 import type { Task } from "../utils/types";
 
-function TaskItem({ task }: { task: Task }) { 
+function TaskItem({ task }: { task: Task }) {
   return (
     <ListItem>
       <Checkbox />
@@ -11,11 +13,12 @@ function TaskItem({ task }: { task: Task }) {
   );
 }
 
-export default function ToDoList({ tasks }: { tasks: Task[] }) { 
+export default function ToDoList() {
+  const taskList = useAtomValue(tasks);
   return (
     <List>
-      {tasks.map((taskItem: Task, index: number) => (
-        <TaskItem key={index} task={taskItem} /> 
+      {taskList.map((taskItem: Task, index: number) => (
+        <TaskItem key={index} task={taskItem} />
       ))}
     </List>
   );
