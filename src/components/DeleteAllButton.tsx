@@ -2,7 +2,6 @@ import { Button } from "@mui/material";
 import {useSetAtom } from "jotai";
 
 import { tasks } from "../utils/atoms";
-import type { Task } from "../utils/types";
 
 export default function DeleteAllButton() {
     const setTaskList = useSetAtom(tasks);
