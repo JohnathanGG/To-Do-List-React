@@ -8,7 +8,7 @@ import ToDoList from "./ToDoList";
 export default function ToDoListPage() {
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
-        <Typography variant="h1" component="h1" gutterBottom align="center">
+        <Typography variant="h2" component="h1" gutterBottom align="center">
             To-Do List
         </Typography>
         

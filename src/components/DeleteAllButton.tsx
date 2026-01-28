@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import {useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 
 import { tasks } from "../utils/atoms";
 
