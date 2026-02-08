@@ -1,19 +1,22 @@
 import { Button } from "@mui/material";
-import { useAtom } from "jotai";
 
-import { tasks } from "../utils/atoms";
 import type { Task } from "../utils/types";
+import { useTasks } from "../hooks/useTasks";
 
 export default function DeleteButton() {
-    const [taskList, setTaskList] = useAtom(tasks);
+  const { taskList, setTasks } = useTasks();
 
-    const DeleteTasks = () => {
-        setTaskList(taskList.filter((task: Task) => !task.complete)
-        );
-    }
-    return (
-        <Button type="button" variant="contained" color="warning" onClick={DeleteTasks}>
-        Delete Completed Tasks
-      </Button>
-    )
+  const DeleteTasks = () => {
+    setTasks(taskList.filter((task: Task) => !task.complete));
+  };
+  return (
+    <Button
+      type="button"
+      variant="contained"
+      color="warning"
+      onClick={DeleteTasks}
+    >
+      Delete Completed Tasks
+    </Button>
+  );
 }

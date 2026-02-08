@@ -1,12 +1,11 @@
-import { useSetAtom } from "jotai";
 import { TextField, Button } from "@mui/material";
 import { useFormik } from "formik";
 
-import { tasks } from "../utils/atoms";
 import type { Task } from "../utils/types";
+import { useTasks } from "../hooks/useTasks";
 
 export default function NewTask() {
-  const setTaskList = useSetAtom(tasks);
+  const { setTasks } = useTasks();
 
   const formik = useFormik({
     initialValues: {
@@ -14,7 +13,7 @@ export default function NewTask() {
     },
     onSubmit: (values) => {
       const newTask: Task = { taskName: values.taskName, complete: false };
-      setTaskList((prevTasks) => [...prevTasks, newTask]);
+      setTasks((prevTasks) => [...prevTasks, newTask]);
       formik.resetForm();
     },
   });
