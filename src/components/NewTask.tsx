@@ -10,9 +10,13 @@ export default function NewTask() {
   const formik = useFormik({
     initialValues: {
       taskName: "",
+      complete: false,
     },
     onSubmit: (values) => {
-      const newTask: Task = { taskName: values.taskName, complete: false };
+      const newTask: Task = {
+        taskName: values.taskName,
+        complete: values.complete,
+      };
       setTasks((prevTasks) => [...prevTasks, newTask]);
       formik.resetForm();
     },
