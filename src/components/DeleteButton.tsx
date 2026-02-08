@@ -6,7 +6,7 @@ import { useTasks } from "../hooks/useTasks";
 export default function DeleteButton() {
   const { taskList, setTasks } = useTasks();
 
-  const DeleteTasks = () => {
+  const handleDeleteTasks = () => {
     setTasks(taskList.filter((task: Task) => !task.complete));
   };
   return (
@@ -14,7 +14,7 @@ export default function DeleteButton() {
       type="button"
       variant="contained"
       color="warning"
-      onClick={DeleteTasks}
+      onClick={handleDeleteTasks}
     >
       Delete Completed Tasks
     </Button>
