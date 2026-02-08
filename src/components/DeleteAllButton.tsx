@@ -6,11 +6,11 @@ import { tasks } from "../utils/atoms";
 export default function DeleteAllButton() {
     const setTaskList = useSetAtom(tasks);
 
-    const DeleteTasks = () => {
+    const deleteTasks = () => {
         setTaskList([]);
     }
     return (
-        <Button type="button" variant="contained" color="secondary" onClick={DeleteTasks}>
+        <Button variant="contained" color="secondary" onClick={deleteTasks}>
         Delete All Tasks
       </Button>
     )
