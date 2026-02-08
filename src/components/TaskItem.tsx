@@ -7,8 +7,8 @@ export const TaskItem = ({ task, index }: { task: Task; index: number }) => {
 
   const handleChange = () => {
     setTasks((prevTasks) =>
-      prevTasks.map((t, i) =>
-        i === index ? { ...t, complete: !t.complete } : t,
+      prevTasks.map((task, taskIndex) =>
+        taskIndex === index ? { ...task, complete: !task.complete } : task,
       ),
     );
   };
