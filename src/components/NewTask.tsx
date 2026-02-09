@@ -5,6 +5,7 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 
 import type { Task } from "../utils/types";
 import { useTasks } from "../hooks/useTasks";
+import dayjs from "dayjs";
 
 const validateTask = z.object({
   taskName: z.string().min(3, "Task name must be at least 3 characters"),
@@ -25,6 +26,7 @@ export default function NewTask() {
         const newTask: Task = {
           taskName: values.taskName,
           complete: values.complete,
+          id: dayjs().valueOf(),
         };
         setTasks((prevTasks) => [...prevTasks, newTask]);
         resetForm();
