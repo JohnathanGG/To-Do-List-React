@@ -1,7 +1,8 @@
-import { useAtom } from "jotai";
+import { useAtom, atom } from "jotai";
 
-import { tasks } from "../utils/atoms";
+import type { Task } from "../utils/types";
 
+export const tasks = atom<Task[]>([]);
 export const useTasks = () => {
   const [taskList, setTasks] = useAtom(tasks);
 
