@@ -1,27 +1,19 @@
 import { TextField, Button } from "@mui/material";
 import { Form, Formik } from "formik";
-import { z } from "zod";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 
 import type { Task } from "../utils/types";
 import { useTasks } from "../hooks/useTasks";
 import dayjs from "dayjs";
-
-const validateTask = z.object({
-  taskName: z.string().min(3, "Task name must be at least 3 characters"),
-  complete: z.boolean(),
-});
+import { taskInitialValues, taskSchema } from "../utils/consts";
 
 export default function NewTask() {
   const { setTasks } = useTasks();
 
   return (
     <Formik
-      initialValues={{
-        taskName: "",
-        complete: false,
-      }}
-      validationSchema={toFormikValidationSchema(validateTask)}
+      initialValues={taskInitialValues}
+      validationSchema={toFormikValidationSchema(taskSchema)}
       onSubmit={(values, { resetForm }) => {
         const newTask: Task = {
           taskName: values.taskName,
