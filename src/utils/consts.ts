@@ -8,4 +8,5 @@ export const taskSchema = z.object({
 export const taskInitialValues = {
   taskName: "",
   complete: false,
+  id: "",
 };
