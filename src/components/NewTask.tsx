@@ -1,10 +1,10 @@
 import { TextField, Button } from "@mui/material";
 import { Form, Formik } from "formik";
 import { toFormikValidationSchema } from "zod-formik-adapter";
+import { v4 as uuidv4 } from "uuid";
 
 import type { Task } from "../utils/types";
 import { useTasks } from "../hooks/useTasks";
-import dayjs from "dayjs";
 import { taskInitialValues, taskSchema } from "../utils/consts";
 
 export default function NewTask() {
@@ -18,7 +18,7 @@ export default function NewTask() {
         const newTask: Task = {
           taskName: values.taskName,
           complete: values.complete,
-          id: dayjs().valueOf(),
+          id: uuidv4(),
         };
         setTasks((prevTasks) => [...prevTasks, newTask]);
         resetForm();
