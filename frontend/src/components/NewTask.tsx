@@ -3,7 +3,7 @@ import { Form, Formik, type FormikHelpers } from "formik";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import { v4 as uuidv4 } from "uuid";
 
-import type { Task } from "../utils/types";
+import type Task from "../utils/types";
 import { useTasks } from "../hooks/useTasks";
 import { taskInitialValues, taskSchema } from "../utils/consts";
 
