@@ -1,10 +1,11 @@
 import "dotenv/config";
-import mongoose from "mongoose";
+import { MongoClient } from "mongodb";
+
+const client = new MongoClient(process.env.MONGO_URI as string);
 
 const connectDB = async () => {
-  const mongoURI = process.env.MONGO_URI;
   try {
-    await mongoose.connect(mongoURI);
+    await client.connect();
     console.log("MongoDB connected");
   } catch (error) {
     console.error("MongoDB connection failed:", error);
@@ -12,4 +13,5 @@ const connectDB = async () => {
   }
 };
 
+export { client };
 export default connectDB;
