@@ -47,3 +47,18 @@ export const deleteManyTasks = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Server error", error });
   }
 };
+
+export const deleteCompletedTasks = async (req: Request, res: Response) => {
+  try {
+    const result = await getTaskCollection().deleteMany({ complete: true });
+
+    if (result.deletedCount === 0) {
+      res.status(404).json({ message: "No tasks found" });
+      return;
+    }
+
+    res.json({ message: `Deleted ${result.deletedCount} tasks` });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+};
