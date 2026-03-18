@@ -5,6 +5,7 @@
     "dev": "npm run frontend & npm run backend"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.90.21",
     "axios": "^1.13.6",
     "mongodb": "^7.1.0"
   }
