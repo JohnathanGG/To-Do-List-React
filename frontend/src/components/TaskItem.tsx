@@ -1,16 +1,11 @@
 import { Checkbox, ListItem, Typography } from "@mui/material";
-import { useTasks } from "../hooks/useTasks";
-import type { Task } from "../utils/types";
+import { useUpdateTask } from "../hooks/useTasks";
+import type Task from "../utils/types";
 
-export const TaskItem = ({ task, index }: { task: Task; index: number }) => {
-  const { setTasks } = useTasks();
-
-  const handleChange = () => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task, taskIndex) =>
-        taskIndex === index ? { ...task, complete: !task.complete } : task,
-      ),
-    );
+export const TaskItem = ({ task }: { task: Task }) => {
+  const updateTask = useUpdateTask();
+  const handleChange = async () => {
+    await updateTask({ ...task, complete: !task.complete }, task.id);
   };
 
   return (

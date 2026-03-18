@@ -1,13 +1,18 @@
 import { Button } from "@mui/material";
 
-import type { Task } from "../utils/types";
-import { useTasks } from "../hooks/useTasks";
+import type Task from "../utils/types";
+import { useDeleteTasks, useGetTasks } from "../hooks/useTasks";
 
 export default function DeleteButton() {
-  const { taskList, setTasks } = useTasks();
+  const { data: taskList } = useGetTasks();
+  const deleteTasks = useDeleteTasks();
 
   const handleDeleteTasks = () => {
-    setTasks(taskList.filter((task: Task) => !task.complete));
+    deleteTasks(
+      taskList
+        .filter((task: Task) => task.complete)
+        .map((task: Task) => task.id) ?? [],
+    );
   };
   return (
     <Button
