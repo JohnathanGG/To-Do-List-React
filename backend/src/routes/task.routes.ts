@@ -11,6 +11,6 @@ const router = Router();
 router.get("/", getTasks);
 router.post("/", createTask);
 router.put("/:id", updateTask);
-router.delete("/:id", deleteManyTasks);
+router.delete("/many", deleteManyTasks);
 
 export default router;
