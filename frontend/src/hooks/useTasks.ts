@@ -33,8 +33,8 @@ const updateTask = async (newTask: Task, id: string) => {
   return data;
 };
 
-const deleteTasks = async (ids: string[]) => {
-  const res = await axios.delete(api, { data: { ids: ids } });
+const deleteTasks = async () => {
+  const res = await axios.delete(api+"/completed");
   const data = await res.data;
   return data;
 };
@@ -46,29 +46,29 @@ export const useGetTasks = () => {
   });
 };
 
-export const useCreateTask = () => {
+export const useTaskActions = () => {
   const queryClient = useQueryClient();
 
-  return async (newTask: Task) => {
-    await createTask(newTask);
+  const invalidate = () =>
     queryClient.invalidateQueries({ queryKey: ["tasks"] });
-  };
-};
 
-export const useUpdateTask = () => {
-  const queryClient = useQueryClient();
-
-  return async (newTask: Task, id: string) => {
-    await updateTask(newTask, id);
-    queryClient.invalidateQueries({ queryKey: ["tasks"] });
-  };
-};
-
-export const useDeleteTasks = () => {
-  const queryClient = useQueryClient();
-
-  return async (ids: string[]) => {
-    await deleteTasks(ids);
-    queryClient.invalidateQueries({ queryKey: ["tasks"] });
+  return {
+    createTask: async (newTask: Task) => {
+      await createTask(newTask);
+      invalidate();
+    },
+    updateTask: async (newTask: Task, id: string) => {
+      await updateTask(newTask, id);
+      invalidate();
+    },
+    deleteTasks: async () => {
+      await deleteTasks();
+      invalidate();
+    },
+    // expose queryClient methods directly
+    refetch: () => queryClient.refetchQueries({ queryKey: ["tasks"] }),
+    reset: () => queryClient.resetQueries({ queryKey: ["tasks"] }),
+    clear: () => queryClient.clear(),
+    invalidate,
   };
 };
