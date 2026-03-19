@@ -1,9 +1,9 @@
 import { Checkbox, ListItem, Typography } from "@mui/material";
-import { useUpdateTask } from "../hooks/useTasks";
 import type Task from "../utils/types";
+import { useTaskActions } from "../hooks/useTasks";
 
 export const TaskItem = ({ task }: { task: Task }) => {
-  const updateTask = useUpdateTask();
+  const {updateTask} = useTaskActions();
   const handleChange = async () => {
     await updateTask({ ...task, complete: !task.complete }, task.id);
   };

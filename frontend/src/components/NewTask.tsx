@@ -4,11 +4,11 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 import { v4 as uuidv4 } from "uuid";
 
 import type Task from "../utils/types";
-import { useCreateTask } from "../hooks/useTasks";
+import { useTaskActions } from "../hooks/useTasks";
 import { taskInitialValues, taskSchema } from "../utils/consts";
 
 export default function NewTask() {
-  const createTask = useCreateTask();
+  const { createTask } = useTaskActions();
   const handleSubmit = (values: Task, { resetForm }: FormikHelpers<Task>) => {
     const newTask: Task = {
       taskName: values.taskName,

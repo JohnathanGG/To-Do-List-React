@@ -1,19 +1,9 @@
 import axios from "axios";
-import { useAtom, atom } from "jotai";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import type Task from "../utils/types";
 
 const api = "/api/tasks";
-
-export const tasks = atom<Task[]>([]);
-export const useTasks = () => {
-  const [taskList, setTasks] = useAtom(tasks);
-  return {
-    taskList,
-    setTasks,
-  };
-};
 
 const getTasks = async () => {
   const res = await axios.get(api);
